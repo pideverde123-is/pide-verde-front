@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pide Verde – Ensaladas UAEMex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --verde-oscuro: #1a3a1f;
+      --verde-medio: #2d6a35;
+      --verde-vivo:  #4caf50;
+      --verde-lima:  #a8e063;
+      --crema:       #f5f0e8;
+      --crema-dark:  #ede5d0;
+      --naranja:     #e8703a;
+      --texto:       #1c1c1c;
+      --blanco:      #ffffff;
+      --sombra:      0 8px 40px rgba(26,58,31,.18);
+      --radio:       18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--crema);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ───────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 5%;
+      background: rgba(245,240,232,.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(76,175,80,.18);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 900;
+      color: var(--verde-oscuro);
+      letter-spacing: -0.5px;
+    }
+    .nav-logo span { color: var(--verde-vivo); }
+
+    .nav-cta {
+      background: var(--verde-medio);
+      color: var(--blanco);
+      border: none; border-radius: 50px;
+      padding: .55rem 1.4rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; font-weight: 600;
+      cursor: pointer;
+      transition: background .25s, transform .18s;
+      text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--verde-vivo); transform: translateY(-1px); }
+
+    /* ─── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 5% 4rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--verde-oscuro) 0%, #254d2b 55%, #1a3a1f 100%);
+    }
+
+    /* decorative blobs */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 55% at 70% 30%, rgba(168,224,99,.13) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(76,175,80,.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(168,224,99,.18);
+      border: 1px solid rgba(168,224,99,.4);
+      color: var(--verde-lima);
+      font-size: .78rem; font-weight: 600;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: .4rem 1rem; border-radius: 50px;
+      margin-bottom: 1.4rem;
+      animation: fadeUp .7s .1s both;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 900;
+      color: var(--blanco);
+      line-height: 1.1;
+      margin-bottom: 1.4rem;
+      animation: fadeUp .7s .2s both;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--verde-lima);
+    }
+
+    .hero-subtitle {
+      font-size: 1.12rem; font-weight: 300;
+      color: rgba(255,255,255,.78);
+      max-width: 480px;
+      line-height: 1.7;
+      margin-bottom: 2.2rem;
+      animation: fadeUp .7s .35s both;
+    }
+
+    .hero-btn {
+      display: inline-flex; align-items: center; gap: .55rem;
+      background: var(--naranja);
+      color: var(--blanco);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem; font-weight: 600;
+      padding: .9rem 2rem;
+      border-radius: 50px; border: none;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 30px rgba(232,112,58,.45);
+      transition: transform .22s, box-shadow .22s, background .2s;
+      animation: fadeUp .7s .48s both;
+    }
+    .hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(232,112,58,.55);
+      background: #d4612e;
+    }
+    .hero-btn svg { width: 20px; height: 20px; }
+
+    /* hero visual */
+    .hero-visual {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      animation: fadeUp .8s .3s both;
+    }
+
+    .bowl-wrap {
+      position: relative;
+      width: clamp(280px, 38vw, 460px);
+      height: clamp(280px, 38vw, 460px);
+    }
+
+    /* SVG bowl illustration */
+    .bowl-wrap svg { width: 100%; height: 100%; filter: drop-shadow(0 20px 60px rgba(0,0,0,.4)); }
+
+    .badge-float {
+      position: absolute;
+      background: var(--crema);
+      border-radius: 14px;
+      padding: .7rem 1rem;
+      font-weight: 600;
+      font-size: .82rem;
+      box-shadow: var(--sombra);
+      animation: float 3.5s ease-in-out infinite;
+    }
+    .badge-float.b1 { top: 8%; right: -8%; animation-delay: 0s; }
+    .badge-float.b2 { bottom: 14%; left: -10%; animation-delay: 1.1s; }
+    .badge-float .emoji { font-size: 1.3rem; margin-right: .3rem; }
+
+    .hero-stats {
+      display: flex; gap: 2rem;
+      margin-top: 2.4rem;
+      animation: fadeUp .7s .6s both;
+    }
+    .hero-stats .stat { text-align: left; }
+    .hero-stats .stat strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem; font-weight: 900;
+      color: var(--verde-lima);
+    }
+    .hero-stats .stat span { font-size: .8rem; color: rgba(255,255,255,.6); }
+
+    /* ─── PROPUESTA DE VALOR ───────────────────────────────────── */
+    .valor {
+      padding: 6rem 5%;
+      background: var(--crema);
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: .75rem; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--verde-medio);
+      margin-bottom: .8rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      text-align: center;
+      color: var(--verde-oscuro);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 3.5rem;
+      color: #555;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.6rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      padding: 2rem 1.6rem;
+      border: 1.5px solid var(--crema-dark);
+      transition: transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--verde-vivo), var(--verde-lima));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: var(--sombra); }
+    .card:hover::after { transform: scaleX(1); }
+
+    .card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--verde-oscuro);
+      margin-bottom: .6rem;
+    }
+    .card p { font-size: .92rem; color: #666; line-height: 1.65; }
+
+    /* ─── MENÚ HIGHLIGHT ───────────────────────────────────────── */
+    .menu {
+      padding: 5rem 5%;
+      background: var(--verde-oscuro);
+      position: relative; overflow: hidden;
+    }
+    .menu::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(76,175,80,.08) 0%, transparent 70%);
+    }
+    .menu .section-title,
+    .menu .section-label { color: var(--verde-lima); }
+    .menu .section-sub { color: rgba(255,255,255,.65); }
+
+    .menu-chips {
+      display: flex; flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 820px; margin: 0 auto;
+    }
+
+    .chip {
+      display: flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(168,224,99,.25);
+      color: var(--blanco);
+      border-radius: 50px;
+      padding: .7rem 1.3rem;
+      font-size: .92rem; font-weight: 500;
+      transition: background .2s, border-color .2s;
+      cursor: default;
+    }
+    .chip:hover {
+      background: rgba(168,224,99,.15);
+      border-color: var(--verde-lima);
+    }
+    .chip .dot {
+      width: 8px; height: 8px;
+      background: var(--verde-lima);
+      border-radius: 50%;
+    }
+
+    /* ─── FORMULARIO / CTA ─────────────────────────────────────── */
+    #registro {
+      padding: 6rem 5%;
+      background: var(--crema-dark);
+      position: relative;
+    }
+
+    .form-wrap {
+      max-width: 580px;
+      margin: 0 auto;
+      background: var(--blanco);
+      border-radius: 28px;
+      padding: 3rem 3.5rem;
+      box-shadow: 0 20px 80px rgba(26,58,31,.12);
+      border: 1.5px solid rgba(76,175,80,.15);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+    .form-header .badge {
+      display: inline-block;
+      background: rgba(76,175,80,.12);
+      color: var(--verde-medio);
+      border-radius: 50px;
+      font-size: .78rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: .4rem 1rem;
+      margin-bottom: .8rem;
+    }
+    .form-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem; font-weight: 900;
+      color: var(--verde-oscuro);
+      line-height: 1.2;
+    }
+    .form-header p {
+      font-size: .92rem; color: #777;
+      margin-top: .5rem;
+    }
+
+    .form-group { margin-bottom: 1.4rem; }
+
+    label {
+      display: block;
+      font-size: .82rem; font-weight: 600;
+      color: var(--verde-oscuro);
+      margin-bottom: .45rem;
+      letter-spacing: .3px;
+    }
+    label .req { color: var(--naranja); }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: .85rem 1.1rem;
+      border: 1.5px solid #ddd;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .97rem;
+      color: var(--texto);
+      background: var(--crema);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      appearance: none;
+    }
+    input:focus, select:focus {
+      border-color: var(--verde-vivo);
+      box-shadow: 0 0 0 3.5px rgba(76,175,80,.15);
+      background: var(--blanco);
+    }
+    input.error, select.error {
+      border-color: #e74c3c;
+      box-shadow: 0 0 0 3px rgba(231,76,60,.12);
+    }
+
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '▾';
+      position: absolute; right: 1rem; top: 50%;
+      transform: translateY(-50%);
+      color: var(--verde-medio);
+      pointer-events: none;
+      font-size: 1rem;
+    }
+
+    .field-error {
+      font-size: .78rem;
+      color: #e74c3c;
+      margin-top: .35rem;
+      display: none;
+    }
+    .field-error.visible { display: block; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--verde-medio), var(--verde-vivo));
+      color: var(--blanco);
+      border: none; border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      letter-spacing: .3px;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(45,106,53,.35);
+      transition: transform .2s, box-shadow .2s, opacity .2s;
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      margin-top: .5rem;
+    }
+    .btn-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(45,106,53,.45);
+    }
+    .btn-submit:disabled { opacity: .6; cursor: not-allowed; }
+
+    .privacy-note {
+      text-align: center;
+      font-size: .75rem;
+      color: #aaa;
+      margin-top: 1rem;
+    }
+    .privacy-note span { color: var(--verde-vivo); }
+
+    /* ─── MODAL ────────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal-box {
+      background: var(--blanco);
+      border-radius: 24px;
+      padding: 2.5rem 2.2rem;
+      max-width: 400px; width: 90%;
+      text-align: center;
+      transform: translateY(30px) scale(.96);
+      transition: transform .3s;
+      box-shadow: 0 30px 80px rgba(0,0,0,.25);
+    }
+    .modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
+
+    .modal-icon {
+      font-size: 3rem;
+      margin-bottom: .8rem;
+      display: block;
+    }
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--verde-oscuro);
+      margin-bottom: .6rem;
+    }
+    .modal-msg { font-size: .95rem; color: #666; line-height: 1.65; margin-bottom: 1.5rem; }
+
+    .modal-btn {
+      background: var(--verde-medio);
+      color: var(--blanco);
+      border: none; border-radius: 50px;
+      padding: .7rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .95rem; font-weight: 600;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .modal-btn:hover { background: var(--verde-vivo); }
+
+    .modal-box.error .modal-title { color: #c0392b; }
+
+    /* ─── FOOTER ───────────────────────────────────────────────── */
+    footer {
+      background: var(--verde-oscuro);
+      color: rgba(255,255,255,.55);
+      text-align: center;
+      padding: 2.5rem 5%;
+      font-size: .85rem;
+    }
+    footer strong { color: var(--verde-lima); }
+
+    /* ─── TOAST LOADER ─────────────────────────────────────────── */
+    .toast {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      border-radius: 14px;
+      padding: 1rem 1.4rem;
+      font-size: .9rem; font-weight: 500;
+      display: flex; align-items: center; gap: .7rem;
+      box-shadow: var(--sombra);
+      transform: translateY(100px); opacity: 0;
+      transition: transform .3s, opacity .3s;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,.3);
+      border-top-color: var(--verde-lima);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+
+    /* ─── KEYFRAMES ────────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; text-align: center; padding-top: 6rem; }
+      .hero-subtitle { margin-left: auto; margin-right: auto; }
+      .hero-btn { margin: 0 auto; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { display: none; }
+      .form-wrap { padding: 2rem 1.5rem; }
+      .hero-title { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ──────────────────────────────────────────────────── -->
+<nav>
+  <div class="nav-logo">Pide<span>Verde</span> 🥗</div>
+  <a href="#registro" class="nav-cta">Quiero mi ensalada</a>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-eyebrow">🌿 UAEMex · Campus · Delivery</div>
+    <h1 class="hero-title">
+      Comer bien<br/>en la U<br/>es <em>posible.</em>
+    </h1>
+    <p class="hero-subtitle">
+      Ensaladas frescas, personalizadas y entregadas directamente en tu facultad.
+      Sin salir del campus. Sin excusas. Con mucho sabor.
+    </p>
+    <a href="#registro" class="hero-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+      Recibe tu menú semanal
+    </a>
+    <div class="hero-stats">
+      <div class="stat"><strong>+12</strong><span>Variedades</span></div>
+      <div class="stat"><strong>100%</strong><span>Fresco diario</span></div>
+      <div class="stat"><strong>15 min</strong><span>Entrega campus</span></div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <!-- SVG Bowl Illustration -->
+    <div class="bowl-wrap">
+      <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
+        <!-- bowl shadow -->
+        <ellipse cx="230" cy="400" rx="150" ry="22" fill="rgba(0,0,0,.25)"/>
+        <!-- bowl body -->
+        <ellipse cx="230" cy="260" rx="170" ry="130" fill="#ffffff" opacity=".96"/>
+        <ellipse cx="230" cy="262" rx="155" ry="118" fill="#f0faf1"/>
+        <!-- greens -->
+        <ellipse cx="230" cy="230" rx="130" ry="85" fill="#6dc47a"/>
+        <ellipse cx="190" cy="215" rx="55" ry="38" fill="#4caf50" opacity=".9"/>
+        <ellipse cx="265" cy="210" rx="48" ry="34" fill="#81c784" opacity=".85"/>
+        <ellipse cx="230" cy="240" rx="60" ry="30" fill="#388e3c" opacity=".7"/>
+        <!-- cherry tomatoes -->
+        <circle cx="200" cy="205" r="14" fill="#e53935"/>
+        <circle cx="200" cy="205" r="5" fill="#ffffff" opacity=".3"/>
+        <circle cx="260" cy="200" r="12" fill="#e53935"/>
+        <circle cx="265" cy="228" r="10" fill="#c62828"/>
+        <!-- corn -->
+        <ellipse cx="235" cy="220" rx="18" ry="9" fill="#fdd835" transform="rotate(-20,235,220)"/>
+        <ellipse cx="248" cy="215" rx="15" ry="7" fill="#f9a825" opacity=".8" transform="rotate(-20,248,215)"/>
+        <!-- avocado slices -->
+        <ellipse cx="210" cy="238" rx="16" ry="22" fill="#aed581" transform="rotate(15,210,238)"/>
+        <ellipse cx="210" cy="238" rx="9" ry="14" fill="#33691e" opacity=".6" transform="rotate(15,210,238)"/>
+        <!-- bowl rim -->
+        <ellipse cx="230" cy="260" rx="170" ry="130" fill="none" stroke="#c8e6c9" stroke-width="3"/>
+        <!-- bowl base -->
+        <path d="M100,260 Q105,360 230,380 Q355,360 360,260" fill="#e0f2f1" opacity=".6"/>
+        <!-- fork -->
+        <rect x="390" y="130" width="7" height="110" rx="3.5" fill="#bdbdbd"/>
+        <rect x="384" y="128" width="4" height="40" rx="2" fill="#bdbdbd"/>
+        <rect x="393" y="128" width="4" height="40" rx="2" fill="#bdbdbd"/>
+        <rect x="402" y="128" width="4" height="40" rx="2" fill="#bdbdbd"/>
+        <!-- spoon -->
+        <rect x="65" y="140" width="7" height="100" rx="3.5" fill="#bdbdbd"/>
+        <ellipse cx="68.5" cy="130" rx="13" ry="17" fill="#bdbdbd"/>
+      </svg>
+
+      <div class="badge-float b1">
+        <span class="emoji">🥑</span>Aguacate fresco
+      </div>
+      <div class="badge-float b2">
+        <span class="emoji">⚡</span>Lista en 15 min
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROPUESTA DE VALOR ───────────────────────────────────────── -->
+<section class="valor">
+  <p class="section-label">¿Por qué Pide Verde?</p>
+  <h2 class="section-title">La ensalada perfecta,<br/>a un clic de distancia</h2>
+  <p class="section-sub">
+    Sabemos que la vida universitaria es intensa. Por eso llevamos opciones saludables,
+    rápidas y deliciosas directo a tu facultad.
+  </p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-icon">🌱</span>
+      <h3>Ingredientes frescos</h3>
+      <p>Seleccionamos vegetales de temporada cada mañana. Sin conservadores, sin artificiales.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎨</span>
+      <h3>100% personalizable</h3>
+      <p>Elige tu base, proteína, aderezos y toppings. Tu ensalada, a tu manera.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🚴</span>
+      <h3>Entrega en campus</h3>
+      <p>Te llevamos tu pedido a la puerta de tu facultad. Sin salir del campus.</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">💚</span>
+      <h3>Precios universitarios</h3>
+      <p>Comer sano no tiene que ser caro. Pensado especialmente para el bolsillo estudiantil.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENÚ HIGHLIGHT ────────────────────────────────────────────── -->
+<section class="menu">
+  <p class="section-label">Nuestro menú</p>
+  <h2 class="section-title" style="color:var(--blanco)">Las favoritas de la semana</h2>
+  <p class="section-sub">Más de 12 combinaciones. Siempre rotando, siempre fresco.</p>
+  <div class="menu-chips">
+    <div class="chip"><span class="dot"></span>Griega Clásica</div>
+    <div class="chip"><span class="dot"></span>Verde Power</div>
+    <div class="chip"><span class="dot"></span>Mediterránea</div>
+    <div class="chip"><span class="dot"></span>César de Pollo</div>
+    <div class="chip"><span class="dot"></span>Mexicana Picante 🌶️</div>
+    <div class="chip"><span class="dot"></span>Quinoa & Frutos Secos</div>
+    <div class="chip"><span class="dot"></span>Tropical con Mango</div>
+    <div class="chip"><span class="dot"></span>Caprese UAEMex</div>
+    <div class="chip"><span class="dot"></span>Vegana del Día</div>
+  </div>
+</section>
+
+<!-- ── FORMULARIO ────────────────────────────────────────────────── -->
+<section id="registro">
+  <p class="section-label">¡Únete a la comunidad!</p>
+  <h2 class="section-title">Recibe el menú semanal<br/>en tu correo UAEMex</h2>
+  <p class="section-sub">
+    Regístrate gratis y recibe cada lunes el menú de la semana, promociones
+    exclusivas para estudiantes y novedades de Pide Verde.
+  </p>
+
+  <div class="form-wrap">
+    <div class="form-header">
+      <span class="badge">🎓 Solo comunidad UAEMex</span>
+      <h2>Quiero mi menú semanal</h2>
+      <p>Llena el formulario y listo. ¡Es gratis!</p>
+    </div>
+
+    <form id="leadForm" novalidate>
+
+      <div class="form-group">
+        <label for="nombre">Nombre completo <span class="req">*</span></label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej. María González López" autocomplete="name"/>
+        <span class="field-error" id="err-nombre">Por favor ingresa tu nombre completo.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="correo">Correo UAEMex <span class="req">*</span></label>
+        <input type="email" id="correo" name="correo" placeholder="usuario@alumno.uaemex.mx"/>
+        <span class="field-error" id="err-correo">El correo debe terminar en @alumno.uaemex.mx o @uaemex.mx.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="facultad">Facultad / Unidad Académica <span class="req">*</span></label>
+        <div class="select-wrap">
+          <select id="facultad" name="facultad">
+            <option value="">— Selecciona tu facultad —</option>
+            <optgroup label="Área de Ciencias Naturales y Exactas">
+              <option>Facultad de Ciencias</option>
+              <option>Facultad de Química</option>
+              <option>Facultad de Medicina</option>
+              <option>Facultad de Medicina Veterinaria y Zootecnia</option>
+              <option>Facultad de Odontología</option>
+              <option>Facultad de Enfermería y Obstetricia</option>
+            </optgroup>
+            <optgroup label="Área de Ingeniería y Tecnología">
+              <option>Facultad de Ingeniería</option>
+              <option>Facultad de Arquitectura y Diseño</option>
+              <option>Facultad de Ingeniería en Sistemas</option>
+            </optgroup>
+            <optgroup label="Área de Ciencias Sociales y Administrativas">
+              <option>Facultad de Ciencias Políticas y Sociales</option>
+              <option>Facultad de Contaduría y Administración</option>
+              <option>Facultad de Derecho</option>
+              <option>Facultad de Economía</option>
+              <option>Facultad de Turismo y Gastronomía</option>
+              <option>Facultad de Trabajo Social y Humanidades</option>
+            </optgroup>
+            <optgroup label="Área de Humanidades y Artes">
+              <option>Facultad de Humanidades</option>
+              <option>Facultad de Lenguas</option>
+              <option>Facultad de Artes</option>
+              <option>Facultad de Ciencias de la Conducta</option>
+              <option>Facultad de Geografía</option>
+            </optgroup>
+            <optgroup label="Unidades Académicas Profesionales">
+              <option>UAP Atlacomulco</option>
+              <option>UAP Chimalhuacán</option>
+              <option>UAP Ecatepec</option>
+              <option>UAP Nezahualcóyotl</option>
+              <option>UAP Temascaltepec</option>
+              <option>UAP Texcoco</option>
+              <option>UAP Valle de Chalco</option>
+              <option>UAP Valle de México</option>
+              <option>UAP Valle de Teotihuacán</option>
+              <option>UAP Zumpango</option>
+            </optgroup>
+          </select>
+        </div>
+        <span class="field-error" id="err-facultad">Selecciona tu facultad o unidad académica.</span>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/>
+        </svg>
+        Quiero mi menú semanal
+      </button>
+
+      <p class="privacy-note">🔒 Tu información está segura. Nunca compartimos tus datos.<br/>
+        <span>Solo correos @uaemex.mx o @alumno.uaemex.mx</span>
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+<footer>
+  <p>© 2025 <strong>Pide Verde</strong> · Toluca, Estado de México · Hecho con 💚 para la comunidad UAEMex</p>
+  <p style="margin-top:.5rem">Contacto: <strong>pideverde123@gmail.com</strong></p>
+</footer>
+
+<!-- ── MODAL ──────────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box" id="modalBox">
+    <span class="modal-icon" id="modalIcon">✅</span>
+    <h3 class="modal-title" id="modalTitle">¡Registro exitoso!</h3>
+    <p class="modal-msg" id="modalMsg">Mensaje de estado aquí.</p>
+    <button class="modal-btn" id="modalClose">Entendido</button>
+  </div>
+</div>
+
+<!-- ── TOAST ──────────────────────────────────────────────────────── -->
+<div class="toast" id="toast">
+  <div class="spinner"></div>
+  <span>Enviando tu registro…</span>
+</div>
+
+<!-- ── JAVASCRIPT ──────────────────────────────────────────────────── -->
+<script>
+  /* ── CONFIG ── Cambia esta URL a la de tu backend Java ── */
+  const API_URL = 'https://pide-verde-back-qgs2.onrender.com';
+
+  /* ── ELEMENTOS ── */
+  const form       = document.getElementById('leadForm');
+  const btnSubmit  = document.getElementById('btnSubmit');
+  const toast      = document.getElementById('toast');
+  const overlay    = document.getElementById('modalOverlay');
+  const modalBox   = document.getElementById('modalBox');
+  const modalIcon  = document.getElementById('modalIcon');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalMsg   = document.getElementById('modalMsg');
+  const modalClose = document.getElementById('modalClose');
+
+  /* ── HELPERS ── */
+  const VALID_DOMAINS = ['@alumno.uaemex.mx', '@uaemex.mx'];
+
+  function isValidEmail(email) {
+    return VALID_DOMAINS.some(d => email.toLowerCase().endsWith(d));
+  }
+
+  function setError(fieldId, errId, show) {
+    const field = document.getElementById(fieldId);
+    const errEl = document.getElementById(errId);
+    if (show) {
+      field.classList.add('error');
+      errEl.classList.add('visible');
+    } else {
+      field.classList.remove('error');
+      errEl.classList.remove('visible');
+    }
+  }
+
+  function showToast(show) {
+    toast.classList.toggle('show', show);
+  }
+
+  function showModal(type, icon, title, msg) {
+    modalBox.className = 'modal-box ' + type;
+    modalIcon.textContent  = icon;
+    modalTitle.textContent = title;
+    modalMsg.textContent   = msg;
+    overlay.classList.add('open');
+  }
+
+  /* ── VALIDACIÓN EN TIEMPO REAL ── */
+  document.getElementById('nombre').addEventListener('input', function() {
+    setError('nombre','err-nombre', this.value.trim() === '');
+  });
+  document.getElementById('correo').addEventListener('input', function() {
+    const v = this.value.trim();
+    setError('correo','err-correo', v !== '' && !isValidEmail(v));
+  });
+  document.getElementById('facultad').addEventListener('change', function() {
+    setError('facultad','err-facultad', this.value === '');
+  });
+
+  /* ── SUBMIT ── */
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const nombre   = document.getElementById('nombre').value.trim();
+    const correo   = document.getElementById('correo').value.trim();
+    const facultad = document.getElementById('facultad').value;
+
+    let valid = true;
+
+    if (!nombre) {
+      setError('nombre','err-nombre', true); valid = false;
+    } else {
+      setError('nombre','err-nombre', false);
+    }
+
+    if (!correo || !isValidEmail(correo)) {
+      setError('correo','err-correo', true); valid = false;
+    } else {
+      setError('correo','err-correo', false);
+    }
+
+    if (!facultad) {
+      setError('facultad','err-facultad', true); valid = false;
+    } else {
+      setError('facultad','err-facultad', false);
+    }
+
+    if (!valid) {
+      showModal('error','⚠️','Campos inválidos',
+        'Por favor corrige los errores marcados en rojo antes de enviar. El correo debe ser @alumno.uaemex.mx o @uaemex.mx.');
+      return;
+    }
+
+    /* ── ENVÍO AL BACKEND ── */
+    btnSubmit.disabled = true;
+    showToast(true);
+
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, correo, facultad })
+      });
+
+      showToast(false);
+
+      if (response.ok) {
+        form.reset();
+        showModal('success','🎉','¡Bienvenido a Pide Verde!',
+          `¡Hola ${nombre}! Ya formas parte de la comunidad. Revisa tu correo ${correo} — te enviamos la confirmación y el menú de esta semana. ¡Disfruta tus ensaladas!`);
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        showModal('error','❌','Error al registrarse',
+          errData.message || 'Ocurrió un error en el servidor. Por favor intenta nuevamente en unos minutos.');
+      }
+    } catch (err) {
+      showToast(false);
+      showModal('error','🔌','Sin conexión',
+        'No pudimos conectar con el servidor. Verifica tu conexión a internet o intenta más tarde.');
+      console.error('Error fetch:', err);
+    } finally {
+      btnSubmit.disabled = false;
+    }
+  });
+
+  /* ── CERRAR MODAL ── */
+  modalClose.addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+</script>
+</body>
+</html>
