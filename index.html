@@ -263,7 +263,7 @@
     }
     .card p { font-size: .92rem; color: #666; line-height: 1.65; }
 
-    /* ─── MENÚ HIGHLIGHT ───────────────────────────────────────── */
+    /* ─── MENÚ  ───────────────────────────────────────── */
     .menu {
       padding: 5rem 5%;
       background: var(--verde-oscuro);
@@ -306,7 +306,7 @@
       border-radius: 50%;
     }
 
-    /* ─── FORMULARIO / CTA ─────────────────────────────────────── */
+    /* ─── FORMULARIO Y CHECK BOX ─────────────────────────────────────── */
     #registro {
       padding: 6rem 5%;
       background: var(--crema-dark);
@@ -431,6 +431,30 @@
     }
     .privacy-note span { color: var(--verde-vivo); }
 
+    
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 1.4rem;
+    }
+    .checkbox-group input[type="checkbox"] {
+      margin-top: 3px;
+      width: 17px;
+      height: 17px;
+      accent-color: var(--verde-medio);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .checkbox-group label {
+      font-size: .85rem;
+      color: #555;
+      line-height: 1.4;
+      font-weight: 400;
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+
     /* ─── MODAL ────────────────────────────────────────────────── */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000;
@@ -538,13 +562,11 @@
 </head>
 <body>
 
-<!-- ── NAVBAR ──────────────────────────────────────────────────── -->
 <nav>
   <div class="nav-logo">Pide<span>Verde</span> 🥗</div>
   <a href="#registro" class="nav-cta">Quiero mi ensalada</a>
 </nav>
 
-<!-- ── HERO ────────────────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-text">
     <div class="hero-eyebrow">🌿 UAEMex · Campus · Delivery</div>
@@ -569,40 +591,29 @@
   </div>
 
   <div class="hero-visual">
-    <!-- SVG Bowl Illustration -->
     <div class="bowl-wrap">
       <svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
-        <!-- bowl shadow -->
         <ellipse cx="230" cy="400" rx="150" ry="22" fill="rgba(0,0,0,.25)"/>
-        <!-- bowl body -->
         <ellipse cx="230" cy="260" rx="170" ry="130" fill="#ffffff" opacity=".96"/>
         <ellipse cx="230" cy="262" rx="155" ry="118" fill="#f0faf1"/>
-        <!-- greens -->
         <ellipse cx="230" cy="230" rx="130" ry="85" fill="#6dc47a"/>
         <ellipse cx="190" cy="215" rx="55" ry="38" fill="#4caf50" opacity=".9"/>
         <ellipse cx="265" cy="210" rx="48" ry="34" fill="#81c784" opacity=".85"/>
         <ellipse cx="230" cy="240" rx="60" ry="30" fill="#388e3c" opacity=".7"/>
-        <!-- cherry tomatoes -->
         <circle cx="200" cy="205" r="14" fill="#e53935"/>
         <circle cx="200" cy="205" r="5" fill="#ffffff" opacity=".3"/>
         <circle cx="260" cy="200" r="12" fill="#e53935"/>
         <circle cx="265" cy="228" r="10" fill="#c62828"/>
-        <!-- corn -->
         <ellipse cx="235" cy="220" rx="18" ry="9" fill="#fdd835" transform="rotate(-20,235,220)"/>
         <ellipse cx="248" cy="215" rx="15" ry="7" fill="#f9a825" opacity=".8" transform="rotate(-20,248,215)"/>
-        <!-- avocado slices -->
         <ellipse cx="210" cy="238" rx="16" ry="22" fill="#aed581" transform="rotate(15,210,238)"/>
         <ellipse cx="210" cy="238" rx="9" ry="14" fill="#33691e" opacity=".6" transform="rotate(15,210,238)"/>
-        <!-- bowl rim -->
         <ellipse cx="230" cy="260" rx="170" ry="130" fill="none" stroke="#c8e6c9" stroke-width="3"/>
-        <!-- bowl base -->
         <path d="M100,260 Q105,360 230,380 Q355,360 360,260" fill="#e0f2f1" opacity=".6"/>
-        <!-- fork -->
         <rect x="390" y="130" width="7" height="110" rx="3.5" fill="#bdbdbd"/>
         <rect x="384" y="128" width="4" height="40" rx="2" fill="#bdbdbd"/>
         <rect x="393" y="128" width="4" height="40" rx="2" fill="#bdbdbd"/>
         <rect x="402" y="128" width="4" height="40" rx="2" fill="#bdbdbd"/>
-        <!-- spoon -->
         <rect x="65" y="140" width="7" height="100" rx="3.5" fill="#bdbdbd"/>
         <ellipse cx="68.5" cy="130" rx="13" ry="17" fill="#bdbdbd"/>
       </svg>
@@ -617,7 +628,6 @@
   </div>
 </section>
 
-<!-- ── PROPUESTA DE VALOR ───────────────────────────────────────── -->
 <section class="valor">
   <p class="section-label">¿Por qué Pide Verde?</p>
   <h2 class="section-title">La ensalada perfecta,<br/>a un clic de distancia</h2>
@@ -650,7 +660,6 @@
   </div>
 </section>
 
-<!-- ── MENÚ HIGHLIGHT ────────────────────────────────────────────── -->
 <section class="menu">
   <p class="section-label">Nuestro menú</p>
   <h2 class="section-title" style="color:var(--blanco)">Las favoritas de la semana</h2>
@@ -668,7 +677,6 @@
   </div>
 </section>
 
-<!-- ── FORMULARIO ────────────────────────────────────────────────── -->
 <section id="registro">
   <p class="section-label">¡Únete a la comunidad!</p>
   <h2 class="section-title">Recibe el menú semanal<br/>en tu correo UAEMex</h2>
@@ -748,6 +756,12 @@
         <span class="field-error" id="err-facultad">Selecciona tu facultad o unidad académica.</span>
       </div>
 
+      <div class="checkbox-group" id="chkGroup">
+        <input type="checkbox" id="terminos" name="terminos" />
+        <label for="terminos">Acepto que Pide Verde utilice mi información de forma confidencial para fines del servicio y entiendo que mis datos están seguros. <span class="req">*</span></label>
+      </div>
+      <span class="field-error" id="err-terminos" style="margin-top: -1rem; margin-bottom: 1.4rem;">Debes aceptar el manejo seguro de tus datos para registrarte.</span>
+
       <button type="submit" class="btn-submit" id="btnSubmit">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/>
@@ -762,13 +776,11 @@
   </div>
 </section>
 
-<!-- ── FOOTER ─────────────────────────────────────────────────────── -->
 <footer>
   <p>© 2025 <strong>Pide Verde</strong> · Toluca, Estado de México · Hecho con 💚 para la comunidad UAEMex</p>
   <p style="margin-top:.5rem">Contacto: <strong>pideverde123@gmail.com</strong></p>
 </footer>
 
-<!-- ── MODAL ──────────────────────────────────────────────────────── -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box" id="modalBox">
     <span class="modal-icon" id="modalIcon">✅</span>
@@ -778,15 +790,13 @@
   </div>
 </div>
 
-<!-- ── TOAST ──────────────────────────────────────────────────────── -->
 <div class="toast" id="toast">
   <div class="spinner"></div>
   <span>Enviando tu registro…</span>
 </div>
 
-<!-- ── JAVASCRIPT ──────────────────────────────────────────────────── -->
 <script>
-  /* ── CONFIG ── Cambia esta URL a la de tu backend Java ── */
+  /* ── CONFIGURACION DE API DE RENDER ── */
   const API_URL = 'https://pide-verde-back-qgs2.onrender.com/api/leads';
 
   /* ── ELEMENTOS ── */
@@ -831,7 +841,7 @@
     overlay.classList.add('open');
   }
 
-  /* ── VALIDACIÓN EN TIEMPO REAL ── */
+  /* ── VALIDACIÓN EN TIEMPO REAL DE FORMULARIO  ── */
   document.getElementById('nombre').addEventListener('input', function() {
     setError('nombre','err-nombre', this.value.trim() === '');
   });
@@ -842,6 +852,11 @@
   document.getElementById('facultad').addEventListener('change', function() {
     setError('facultad','err-facultad', this.value === '');
   });
+  
+  // Validación en tiempo real para la casilla de privacidad
+  document.getElementById('terminos').addEventListener('change', function() {
+    setError('terminos', 'err-terminos', !this.checked);
+  });
 
   /* ── SUBMIT ── */
   form.addEventListener('submit', async function(e) {
@@ -850,6 +865,7 @@
     const nombre   = document.getElementById('nombre').value.trim();
     const correo   = document.getElementById('correo').value.trim();
     const facultad = document.getElementById('facultad').value;
+    const terminos = document.getElementById('terminos').checked;
 
     let valid = true;
 
@@ -871,13 +887,20 @@
       setError('facultad','err-facultad', false);
     }
 
+    // Validación obligatoria de los términos de uso de datos 
+    if (!terminos) {
+      setError('terminos', 'err-terminos', true); valid = false;
+    } else {
+      setError('terminos', 'err-terminos', false);
+    }
+
     if (!valid) {
       showModal('error','⚠️','Campos inválidos',
-        'Por favor corrige los errores marcados en rojo antes de enviar. El correo debe ser @alumno.uaemex.mx o @uaemex.mx.');
+        'Por favor corrige los errores marcados en rojo antes de enviar. Asegúrate de aceptar el uso seguro de datos y que el correo sea institucional.');
       return;
     }
 
-    /* ── ENVÍO AL BACKEND ── */
+    /* ── ENVÍO DE INFORMACIÓN AL BACKEND ── */
     btnSubmit.disabled = true;
     showToast(true);
 
@@ -909,10 +932,9 @@
     }
   });
 
-  /* ── CERRAR MODAL ── */
-  modalClose.addEventListener('click', () => overlay.classList.remove('open'));
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.classList.remove('open');
+  /* ── CERRAR MODAL (COMPLETADO DE FORMA SEGURA) ── */
+  modalClose.addEventListener('click', function() {
+    overlay.classList.remove('open');
   });
 </script>
 </body>
